@@ -1,0 +1,223 @@
+/*
+style for development tests
+Project REGISTRO FINANZIARIO
+Ver 1.0
+AG 2019
+*/
+/*global rules*/
+body{
+	box-sizing: border-box;
+	margin: 0;
+}
+/*main styles*/
+.btn{
+	font-size: 30px;
+	padding: 20px;
+	border-radius: 5px;
+	background-color: teal;
+	color: white;
+	text-decoration: none;
+	border:2px solid lightblue;
+	box-shadow: 1px 5px 20px rgba(0,0,0, .3);
+}
+.btn-bland-warning{
+	background-color: #ffb400;
+	border-color: blue;
+	color: black;
+	font-size: 15px!important;
+}
+.btn-warning{
+	background-color: #fd1f1f;
+	font-weight: bold;
+	font-size: 15px!important;
+	box-shadow: none;
+	border-color: violet;
+	text-decoration: none;
+}
+input[type='text']{
+	width: 350px;
+	height: 65px;
+	border: 3px solid silver;
+	border-radius:3px;
+	margin: auto;
+	font-size: 50px;
+	margin-top: 40px;
+	background-color: #29374f;
+	color: white;
+	box-shadow: 1px 5px 20px rgba(0,0,0, .3);
+}
+.container-input{
+	position: relative;
+}
+form .container-input span{
+	position: absolute;
+	top: 10px;
+}
+/*index page*/
+.center{
+	width: 620px;
+	margin:auto;
+	text-align: center;
+}
+.center form{
+	padding-top: 30px;
+}
+.center form input[type='checkbox']{
+	float: right;
+	margin-top: -50px;
+	margin-right:100px;
+}
+.center form .container-input .check{
+	position: absolute;
+	top: -50px;
+	right: -85px;
+}
+.center form .btn{
+	margin-top: 50px;
+	font-size: 30px;
+	padding: 20px;
+	border-radius: 5px;
+	background-color: teal;
+	color: white;
+	border:2px solid lightblue;
+	box-shadow: 1px 5px 20px rgba(0,0,0, .3);
+}
+/*reg page*/
+header .info:after{
+	width: 100%;
+	content: '';
+	display: block;
+	clear: both;
+}
+header .heading-title{
+	float: right;
+	margin-top: -100px;
+}
+header{
+	border-bottom: 3px solid blue;
+	padding-bottom: 30px;
+}
+header .info div{
+	float: left;
+	text-align: center;
+	margin-right: 30px;
+}
+header .info div span{
+	font-size: 20px;
+}
+.wrapper{
+	width: 925px;
+	margin:auto;
+	position: relative;
+}
+.wrapper:after{
+	width: 100%;
+	content: '';
+	display: block;
+	clear: both;
+}
+.wrapper .col1{
+	float: left;
+	width: 29%;
+}
+.wrapper .col1 .btn{
+	font-size: 12px;
+	float: left;
+	text-decoration: none;
+}
+.wrapper .col1 a:nth-child(3){
+	margin-top: 20px;
+}
+.wrapper .col2{
+	float: left;
+	width: 69%;
+	padding-left: 10px;
+	border-left: 3px solid blue;
+	min-height: 300px;
+}
+.wrapper .col2 .heading{
+	width: 100%;
+	display: block;
+}
+.wrapper .col2 .heading h2:nth-child(2){
+	float: right;
+	margin-top: -50px;
+}
+.wrapper .col2 .exits{
+	width: 100%;
+}
+.wrapper .col2 .exits .tag{
+	position: absolute;
+	right: 0;
+	padding: 5px;
+}
+.ordinaria{
+	background-color: #ffb400;
+}
+.straordinaria{
+	background-color: #fd1f1f;
+	color: white;
+}
+.imperativa{
+	background-color: #4e1ffd;
+	color: white;
+}
+footer{
+	position: absolute;
+	bottom:0;
+}
+footer .btn-warning{
+	font-size: 10px;
+}
+/*add page*/
+.cont{
+	float: left;
+	margin-left: 30px;
+}
+.data{
+	position: absolute;
+	top: 50%;
+}
+.btn{
+	font-size: 20px;
+}
+.tenda{
+	float: right;
+	width: 300px;
+	height: 50px;
+	background-color: black;
+	color:white;
+	margin-right: 100px;
+	margin-top: 40px;
+	padding: 10px;
+	border-radius: 5px;
+	overflow: hidden;
+	transition-property: height;
+	transition-duration: .1s;
+}
+.tenda ul{
+	margin-top: 40px;
+}
+.tenda p span{
+	margin-right: 10px;
+	margin-left: 10px;
+	cursor: pointer;
+	font-weight: bold;
+	font-family: arial, sans-serif;
+}
+.tenda:hover{
+	height: 160px;
+	transition-property: all;
+	transition-duration: .1s;
+}
+.tenda ul li{
+	list-style: none;
+	margin: 10px;
+}
+.tenda a{
+	color: white;
+	text-decoration: none;
+}
+footer{
+	bottom: 50px;
+}
