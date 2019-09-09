@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Expenses = require('../models/expenses');
-
+let dat;
 // get all
 exports.get_all = (req, res, next)=>{
 	Expenses.find()
@@ -17,13 +17,14 @@ exports.get_all = (req, res, next)=>{
 				}
 			})
 		}
+		//console.table(response.expenses);
 		res.status(200).send(response);
 	})
 	.catch(err=>{
 		res.status(500).send(err);
 	});
 }
-
+console.log(response.expenses);
 // add new
 exports.add_new = (req, res, next)=>{
 	const expenses = new Expenses({

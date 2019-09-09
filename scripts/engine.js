@@ -38,13 +38,23 @@ const cCorrente = capitale - bilancio;
 const cRiserva = cCorrente - riserva;
 const media = Math.round(bilancio / spese.length * 100)/100;
 
+const resoconto = [];
+resoconto["resoconto"] = {
+		capitale: capitale,
+		corrente: cCorrente,
+		bilancio: bilancio,
+		riserva: cRiserva,
+		media: media	
+	};
+
 // testing console
-console.log("------- resoconto -------");
-console.log(`${capitale} capitale iniziale`);
+console.log("--------------");
+/*console.log(`${capitale} capitale iniziale`);
 console.log(`${cCorrente} capitale corrente`);
 console.log(`${bilancio} bilancio spese`);
 console.log(`${cRiserva.toFixed(2)} riserva`);
-console.log(`${media} media del mese`);
+console.log(`${media} media del mese`);*/
+console.table(resoconto);
 
 // version display
 console.log('__________________________________');
