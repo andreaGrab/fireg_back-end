@@ -1,5 +1,9 @@
 {
 	"env":{
 		"MONGO_PSWD": "zen123local"
-	}
+	},
+	"ignore":[
+		"spese.js",
+		"main_dat.js"
+	]
 }

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Expenses = require('../models/expenses');
-let dat;
+
 // get all
 exports.get_all = (req, res, next)=>{
 	Expenses.find()
@@ -24,7 +24,32 @@ exports.get_all = (req, res, next)=>{
 		res.status(500).send(err);
 	});
 }
-console.log(response.expenses);
+
+// get all(report)
+exports.get_all_report = (req, res, next)=>{
+	Expenses.find()
+	.select('name expenses tag')
+	.exec()
+	.then(docs=>{
+		const response = {
+			expenses: docs.map(doc=>{
+				return {
+					_id: doc._id,
+					name: doc.name,
+					expenses: doc.expenses,
+					tag: doc.tag
+				}
+			})
+		}
+		console.table(response.expenses);
+		res.status(200).send("Result logged!");
+	})
+	.catch(err=>{
+		res.status(500).send(err);
+	});
+}
+
+
 // add new
 exports.add_new = (req, res, next)=>{
 	const expenses = new Expenses({
@@ -38,6 +63,7 @@ exports.add_new = (req, res, next)=>{
 		.then(result=>{
 			console.log(result);
 			res.status(201).send('Expense created!');
+			const Spese = require('../../scripts/spese');
 		})
 		.catch(err=>{
 			console.log(err);

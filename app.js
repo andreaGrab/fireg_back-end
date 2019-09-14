@@ -4,9 +4,16 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
+const Spese = require('./scripts/spese');
+const Main_data = require('./scripts/main_dat');
+
+const spese = require('./spese');
+const main_dat = require('./main_dat');
+
 // routes
 const mainData = require('./api/routes/main-data');
 const expenses = require('./api/routes/expenses');
+const report = require('./api/routes/report');
 
 // db connection
 mongoose.connect("mongodb+srv://Andrea:" + 
@@ -45,8 +52,9 @@ app.use((req, res, next)=>{
 /////////////////////////////////////////
 
 // routes handling
-app.use('/insert', mainData);
+app.use('/main-data', mainData);
 app.use('/expenses', expenses);
+app.use('/report', report);
 
 ////////////////////////////////////////
 //- error 404 handling
@@ -66,6 +74,4 @@ app.use((error, req, res, next)=>{
 	});
 });
 ////////////////////////////////////////
-
-//const engine = require('./scripts/engine');
 module.exports = app;

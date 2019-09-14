@@ -1,6 +1,27 @@
 const mongoose = require('mongoose');
 const MainData = require('../models/mainData');
 
+// get all
+exports.get_all = (req, res, next)=>{
+	MainData.find()
+	.select('capital reserve')
+	.exec()
+	.then(data=>{
+		const response = {
+			data: data.map(dat=>{
+				return {
+					capital: dat.capital,
+					reserve: dat.reserve
+				}
+			})
+		};
+		res.status(200).send(response);
+	})
+	.catch(err=>{
+		res.status(500).send(err);
+	});
+};
+
 // insert
 exports.add_data = (req, res, next)=>{
 	const mainData = new MainData({
