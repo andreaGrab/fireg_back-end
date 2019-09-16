@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Expenses = require('../models/expenses');
+const Spese = require('../../scripts/spese');
+const path = require('path');
 
 // get all
 exports.get_all = (req, res, next)=>{
@@ -17,7 +19,6 @@ exports.get_all = (req, res, next)=>{
 				}
 			})
 		}
-		//console.table(response.expenses);
 		res.status(200).send(response);
 	})
 	.catch(err=>{
@@ -63,7 +64,9 @@ exports.add_new = (req, res, next)=>{
 		.then(result=>{
 			console.log(result);
 			res.status(201).send('Expense created!');
-			const Spese = require('../../scripts/spese');
+			Spese();
+			const speseFile = path.resolve('coding/capitale', '../../spese.js');
+			delete require.cache[speseFile];
 		})
 		.catch(err=>{
 			console.log(err);

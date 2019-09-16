@@ -1,5 +1,4 @@
 exports.get_report = (req, res, next)=>{
-	const Spese = require('../../scripts/spese');
 	const spese = require('../../spese');
 	const main_dat = require('../../main_dat');
 	let speseCifre = [];

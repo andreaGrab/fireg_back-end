@@ -4,16 +4,14 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
-const Spese = require('./scripts/spese');
-const Main_data = require('./scripts/main_dat');
-
-const spese = require('./spese');
-const main_dat = require('./main_dat');
-
 // routes
 const mainData = require('./api/routes/main-data');
 const expenses = require('./api/routes/expenses');
 const report = require('./api/routes/report');
+
+const Spese = require('./scripts/spese');
+Spese();
+const Main_data = require('./scripts/main_dat');
 
 // db connection
 mongoose.connect("mongodb+srv://Andrea:" + 
