@@ -1,7 +1,7 @@
-	const fetch = require('node-fetch');
-	const fs = require('fs');
+const fetch = require('node-fetch');
+const fs = require('fs');
 
-	const spese_init = ()=>{
+const spese_init = ()=>{
 	fetch('http://localhost:3000/expenses')
 	.then(response=> response.json())
 	.then(json=>{

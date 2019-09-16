@@ -9,9 +9,11 @@ const mainData = require('./api/routes/main-data');
 const expenses = require('./api/routes/expenses');
 const report = require('./api/routes/report');
 
+// save/update local files from db (spese & main_dat)
 const Spese = require('./scripts/spese');
 Spese();
 const Main_data = require('./scripts/main_dat');
+Main_data();
 
 // db connection
 mongoose.connect("mongodb+srv://Andrea:" + 
