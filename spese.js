@@ -1,1 +1,1 @@
-let spese = [{"_id":"5d7f4fd2bd649d4d1c73921f","name":"prima uscita","expenses":284.25,"tag":"ordinaria"}]; module.exports = spese;
+let spese = []; module.exports = spese;

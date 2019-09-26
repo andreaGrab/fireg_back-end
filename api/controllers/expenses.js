@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const Expenses = require('../models/expenses');
 const Spese = require('../../scripts/spese');
 const path = require('path');
+const speseFile = path.resolve('coding/capitale', '../../spese.js');
 
 // get all
 exports.get_all = (req, res, next)=>{
 	Expenses.find()
-	.select('name expenses tag')
+	.select('name expenses tag exp')
 	.exec()
 	.then(docs=>{
 		const response = {
@@ -15,7 +16,8 @@ exports.get_all = (req, res, next)=>{
 					_id: doc._id,
 					name: doc.name,
 					expenses: doc.expenses,
-					tag: doc.tag
+					tag: doc.tag,
+					exp: doc.exp
 				}
 			})
 		}
@@ -24,7 +26,7 @@ exports.get_all = (req, res, next)=>{
 	.catch(err=>{
 		res.status(500).send(err);
 	});
-}
+};
 
 // get all(report)
 exports.get_all_report = (req, res, next)=>{
@@ -48,7 +50,7 @@ exports.get_all_report = (req, res, next)=>{
 	.catch(err=>{
 		res.status(500).send(err);
 	});
-}
+};
 
 
 // add new
@@ -65,11 +67,24 @@ exports.add_new = (req, res, next)=>{
 			console.log(result);
 			res.status(201).send('Expense created!');
 			Spese();
-			const speseFile = path.resolve('coding/capitale', '../../spese.js');
 			delete require.cache[speseFile];
 		})
 		.catch(err=>{
 			console.log(err);
 			res.status(500).send(err);
 		});
+};
+
+// delete by id
+exports.delete = (req, res, next)=>{
+	Expenses.deleteOne({_id:req.params.expId})
+	.exec()
+	.then(result=>{
+		res.status(200).send('Expenses deleted!');
+		Spese();
+		delete require.cache[speseFile];
+	})
+	.catch(err=>{
+		res.status(500).send(err);
+	})
 };

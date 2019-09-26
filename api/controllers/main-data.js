@@ -6,14 +6,15 @@ const path = require('path');
 // get all
 exports.get_all = (req, res, next)=>{
 	MainData.find()
-	.select('capital reserve')
+	.select('capital reserve mData')
 	.exec()
 	.then(data=>{
 		const response = {
 			data: data.map(dat=>{
 				return {
 					capital: dat.capital,
-					reserve: dat.reserve
+					reserve: dat.reserve,
+					mData: dat.mData
 				}
 			})
 		};

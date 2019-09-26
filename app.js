@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const mainData = require('./api/routes/main-data');
 const expenses = require('./api/routes/expenses');
 const report = require('./api/routes/report');
+const abort = require('./api/routes/abort');
 
 // save/update local files from db (spese & main_dat)
 const Spese = require('./scripts/spese');
@@ -55,6 +56,7 @@ app.use((req, res, next)=>{
 app.use('/main-data', mainData);
 app.use('/expenses', expenses);
 app.use('/report', report);
+app.use('/abort', abort);
 
 ////////////////////////////////////////
 //- error 404 handling
