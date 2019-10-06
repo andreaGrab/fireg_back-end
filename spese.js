@@ -1,1 +1,1 @@
-let spese = [{"_id":"5d9a2304aa86e804c125af9b","name":"prima uscita","expenses":100,"tag":"ordinaria","exp":"spesa"},{"_id":"5d9a2358aa86e804c125af9e","name":"bollo","expenses":370.63,"tag":"imperativa","exp":"spesa"}]; module.exports = spese;
+let spese = []; module.exports = spese;
