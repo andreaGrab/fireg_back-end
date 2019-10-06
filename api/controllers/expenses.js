@@ -3,6 +3,7 @@ const Expenses = require('../models/expenses');
 const Spese = require('../../scripts/spese');
 const path = require('path');
 const speseFile = path.resolve('coding/capitale', '../../spese.js');
+const jwt= require('jsonwebtoken');
 
 // get all
 exports.get_all = (req, res, next)=>{
@@ -77,14 +78,21 @@ exports.add_new = (req, res, next)=>{
 
 // delete by id
 exports.delete = (req, res, next)=>{
-	Expenses.deleteOne({_id:req.params.expId})
-	.exec()
-	.then(result=>{
-		res.status(200).send('Expenses deleted!');
-		Spese();
-		delete require.cache[speseFile];
-	})
-	.catch(err=>{
-		res.status(500).send(err);
-	})
+	jwt.verify(req.token, process.env.JWT_SECRET, (err, obj)=>{
+		if(err){
+			res.status(400).send(err);
+			console.log(err);
+		}else{
+			Expenses.deleteOne({_id:req.params.expId})
+			.exec()
+			.then(result=>{
+				res.status(200).send('Expenses deleted!');
+				Spese();
+				delete require.cache[speseFile];
+			})
+			.catch(err=>{
+				res.status(500).send(err);
+			});
+		}
+	});
 };
