@@ -9,8 +9,8 @@ exports.get_report = (req, res, next)=>{
 		res.status(200).send("Nothing to report");
 	}else{
 		const bilancio = speseCifre.reduce((a,c)=>a+c);
-		const cCorrente = main_dat['data'][0].capital - bilancio;
-		const cRiserva = cCorrente - main_dat['data'][0].reserve;
+		const cCorrente = Math.round((main_dat['data'][0].capital - bilancio)*100)/100;
+		const cRiserva = Math.round((cCorrente - main_dat['data'][0].reserve)*100)/100;
 		const media = Math.round(bilancio / speseCifre.length * 100)/100;
 
 		const resoconto = [];
@@ -22,6 +22,7 @@ exports.get_report = (req, res, next)=>{
 				media: media	
 			};
 		console.table(resoconto);
-		res.status(200).send("Report requested, result logged!");
+		//res.status(200).send("Report requested, result logged!");
+		res.status(200).json(resoconto['resoconto']);
 	}
 };

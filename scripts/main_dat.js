@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 
 const main_data_init = ()=>{
-	fetch('http://localhost:3000/main-data')
+	fetch('http://localhost:3001/main-data')
 	.then(response=> response.json())
 	.then(json=>{
 		let main_data = JSON.stringify(json);

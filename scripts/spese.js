@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 
 const spese_init = ()=>{
-	fetch('http://localhost:3000/expenses')
+	fetch('http://localhost:3001/expenses')
 	.then(response=> response.json())
 	.then(json=>{
 		let spese = JSON.stringify(json.expenses);

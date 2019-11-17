@@ -46,7 +46,7 @@ exports.get_all_report = (req, res, next)=>{
 			})
 		}
 		console.table(response.expenses);
-		res.status(200).send("Result logged!");
+		res.status(200).json(response.expenses);
 	})
 	.catch(err=>{
 		res.status(500).send(err);
