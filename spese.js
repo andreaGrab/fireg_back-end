@@ -1,1 +1,1 @@
-let spese = [{"_id":"5dcd40831b35a54d756f71d9","name":"bollo","expenses":370.63,"tag":"imperativa","exp":"spesa"},{"_id":"5dd146eb63ef86589bd08642","name":"spesa casa","expenses":110,"tag":"ordinaria","exp":"spesa"},{"_id":"5dd1473763ef86589bd08643","name":"Riparazione macchina","expenses":350.22,"tag":"straordinaria","exp":"spesa"}]; module.exports = spese;
+let spese = [{"_id":"5de7a5db7d584513a3456e44","name":"prova","expenses":10,"tag":"ordinaria","exp":"spesa"}]; module.exports = spese;

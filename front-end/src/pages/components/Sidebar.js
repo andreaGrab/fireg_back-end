@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Sidebar extends React.Component{
 	constructor(props){
@@ -21,8 +22,8 @@ class Sidebar extends React.Component{
 					<h1>Capitale corrente<br />{
 						this.state.dat.corrente
 					}€</h1>
-					<button className='btn-default btn-sidebar'>NOTIFICA SPESA</button>
-					<button className='btn-default btn-sidebar'>RESOCONTO VELOCE</button>
+					<Link className='btn-default btn-sidebar' to='/not'>NOTIFICA SPESA</Link>
+					<button className='btn-default btn-sidebar'><Link to='/rep'>RESOCONTO VELOCE</Link></button>
 					<button className='btn-default btn-default--abort'>ABORTIRE REGISTRO</button>
 				</div>
 			</div>

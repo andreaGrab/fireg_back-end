@@ -66,7 +66,7 @@ exports.add_new = (req, res, next)=>{
 	expenses.save()
 		.then(result=>{
 			console.log(result);
-			res.status(201).send('Expense created!');
+			res.status(201).redirect('/reg');
 			Spese();
 			delete require.cache[speseFile];
 		})
