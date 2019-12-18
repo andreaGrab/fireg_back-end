@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 class Report extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {exps:[], reportData:[]};
+		this.printPage = this.printPage.bind(this);
+		this.pdfPage = this.pdfPage.bind(this);
 	}
 
 	componentDidMount(){
@@ -15,6 +19,22 @@ class Report extends React.Component {
 		fetch('/report')
 		.then(res => res.json())
 		.then(reportData => this.setState({reportData}));
+	}
+
+ 	printPage(){
+	 	window.print();
+	}
+
+	pdfPage(){
+		let reportView = document.querySelector('.reportView');
+		window.scrollTo(0, 0);
+		reportView.style.width = '794px';
+		html2canvas(reportView, {scale:1}).then(canvas=>{
+			let pdf = new jsPDF('p', 'mm', 'a4');
+			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 0, 0);
+			pdf.save('report.pdf');
+		});
+		reportView.style.width = 'initial';
 	}
 
 	render(){
@@ -62,9 +82,9 @@ class Report extends React.Component {
 						</table>
 					</div>
 				</div>
-				<div className='reportView__footer'>
-					<button className='btn-default'>SALVA PDF</button>
-					<button className='btn-default'>STAMPA</button>
+				<div className='reportView__footer' data-html2canvas-ignore='true'>
+					<button className='btn-default' onClick={this.pdfPage}>SALVA PDF</button>
+					<button className='btn-default' onClick={this.printPage}>STAMPA</button>
 					<Link className='btn-default' to='/reg'>ESCI</Link>
 				</div>
 			</div>
