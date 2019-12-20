@@ -8,7 +8,7 @@ exports.get_report = (req, res, next)=>{
 	if(speseCifre.length == 0){
 		res.status(200).send("Nothing to report");
 	}else{
-		const bilancio = speseCifre.reduce((a,c)=>a+c);
+		const bilancio = Math.round((speseCifre.reduce((a,c)=>a+c))*100)/100;
 		const cCorrente = Math.round((main_dat['data'][0].capital - bilancio)*100)/100;
 		const cRiserva = Math.round((cCorrente - main_dat['data'][0].reserve)*100)/100;
 		const media = Math.round(bilancio / speseCifre.length * 100)/100;

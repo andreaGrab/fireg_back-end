@@ -27,11 +27,23 @@ class Report extends React.Component {
 
 	pdfPage(){
 		let reportView = document.querySelector('.reportView');
-		window.scrollTo(0, 0);
-		reportView.style.width = '794px';
+		window.scrollTo(0, 0);// top scroll position of browser window
+		reportView.style.width = '794px';// a4 width for pdf creation
+		// creating the sceenshot
 		html2canvas(reportView, {scale:1}).then(canvas=>{
-			let pdf = new jsPDF('p', 'mm', 'a4');
-			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 0, 0);
+			let pdf = new jsPDF('p', 'mm', 'a4');// new jspdf instace
+			// converting screen to png & adding to new pdf doc
+			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 2, 210, 0);
+			// if the image is taller than a4 canvas make new page & put
+			//- the other parts of the image
+			if(canvas.height > 1133){
+				let shiftImg = -293;
+				for(let a4H = 1133; a4H<canvas.height; a4H+=1133){
+					pdf.addPage();
+					pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, shiftImg, 210, 0);
+					shiftImg-=295;
+				}
+			}
 			pdf.save('report.pdf');
 		});
 		reportView.style.width = 'initial';
@@ -67,7 +79,7 @@ class Report extends React.Component {
 								</tr>
 								{this.state.exps.map(exp=>(							
 									<tr>
-										<td><strong>{exp.expenses}</strong> {exp.name}</td>
+										<td><strong>{exp.expenses}€</strong> {exp.name}</td>
 										{(()=>{
 											switch(exp.tag){
 												case "ordinaria": return <td className='tag tag--low'>{exp.tag}</td>;
