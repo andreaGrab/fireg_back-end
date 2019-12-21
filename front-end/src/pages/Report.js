@@ -54,6 +54,7 @@ class Report extends React.Component {
 			<div className='reportView'>
 				<div className='reportView__header'>
 					<h1>RESOCONTO VELOCE</h1>
+					<p className='date'>IN DATA <strong>{this.props.day} {this.props.month} {this.props.year}</strong></p>
 				</div>
 				<div className='reportView__content'>
 					<div className='reportView__content__data'>

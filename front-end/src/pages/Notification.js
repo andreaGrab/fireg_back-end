@@ -8,7 +8,7 @@ class Notification extends React.Component {
 				<div className='notifyExp__header'>
 					<h1>NOTIFICA SPESA</h1>
 				</div>
-				<FormNotify />
+				<FormNotify day={this.props.day} month={this.props.month} year={this.props.year}/>
 			</div>
 		);
 	}

@@ -11,6 +11,40 @@ import {
 } from 'react-router-dom';
 
 class App extends React.Component {
+	constructor(props){
+		super(props);
+		this.getTheDate = this.getTheDate.bind(this);
+	}
+
+	getTheDate(dType){
+		let months = [
+			'GENNAIO',
+			'FEBBRAIO',
+			'MARZO',
+			'APRILE',
+			'MAGGIO',
+			'GIUGNO',
+			'LUGLIO',
+			'AGOSTO',
+			'SETTEMBRE',
+			'OTTOBRE',
+			'NOVEMBRE',
+			'DICEMBRE'
+		];
+		let now = new Date();
+		let day = now.getDate();
+		let month = now.getMonth();
+		let year = now.getFullYear();
+
+		if(dType === "d"){
+			return day;
+		}else if(dType === "m"){
+			return months[month];
+		}else if(dType === "y"){
+			return year;
+		}
+	}
+
 	render(){
 		return (
 			<Router>
@@ -21,13 +55,13 @@ class App extends React.Component {
 						<Link to='/reg'>Go to register view</Link>
 					</Route>
 					<Route path='/reg'>
-						<Register />
+						<Register day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} />
 					</Route>
 					<Route path='/not'>
-						<Notification />
+						<Notification day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} />
 					</Route>
 					<Route path='/rep'>
-						<Report />
+						<Report day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')}/>
 					</Route>
 				</Switch>
 			    </div>

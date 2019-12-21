@@ -21,7 +21,7 @@ class FromNotify extends React.Component {
 						<option value="imperativa">IMPERATIVA</option>
 					</select>
 				</label>
-				<p className='date'>IN DATA <strong>1 GENNAIO 2019(NOT)</strong></p>
+				<p className='date'>IN DATA <strong>{this.props.day} {this.props.month} {this.props.year}</strong></p>
 				<input className='btn-default btn-default--confirm' type="submit" name="submit-exp" value='CONFERMA' />
 				<button className='btn-default btn-default--reject' onClick={(e)=>e.preventDefault()}><Link to='/reg'>CANCELLA</Link></button>
 			</form>

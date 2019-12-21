@@ -23,7 +23,7 @@ class Expenses extends React.Component{
 						</tr>
 						{this.state.exps.map(exp=>(							
 							<tr>
-								<td><strong>{exp.expenses}</strong> {exp.name}</td>
+								<td><strong>{exp.expenses}€</strong> {exp.name}</td>
 								{(()=>{
 									switch(exp.tag){
 										case "ordinaria": return <td className='tag tag--low'>{exp.tag}</td>;
