@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 class Sidebar extends React.Component{
 	constructor(props){
 		super(props);
-		this.state = {dat:[]};
+		this.state = {dat:[], onErr: "none"};
+		this.abortAction = this.abortAction.bind(this);
 	}
 
 	componentDidMount(){
@@ -12,6 +14,16 @@ class Sidebar extends React.Component{
 		.then(res => res.json())
 		.then(dat => {
 			this.setState({dat})
+		});
+	}
+
+	abortAction(){
+		Axios.delete('/abort')
+		.then(res => res)
+		.then(obj => console.log(obj.data))
+		.then(()=>window.location.reload())
+		.catch(err=>{
+			this.setState({onErr: 'inline'});
 		});
 	}
 
@@ -26,6 +38,13 @@ class Sidebar extends React.Component{
 			color: 'white',
 			boxShadow: '1px 3px 5px 1px rgba(0,0,0, .5)'
 		}
+
+		const forbStyle = {
+			color: '#f00',
+			fontWeight: 'bolder',
+			fontSize: '1.5rem',
+			display: this.state.onErr
+		};
 		return(
 			<div className="regView__content__sidebar">
 				<div className='regView__content__sidebar__wrapper'>
@@ -46,7 +65,8 @@ class Sidebar extends React.Component{
 						</label><br />
 						<input type='submit' />
 					</form>
-					<button className='btn-default btn-default--abort'>ABORTIRE REGISTRO</button>
+					<p style={forbStyle}>ABORT <br/>NON AUTORIZZATO!</p>
+					<button className='btn-default btn-default--abort' onClick={this.abortAction}>ABORTIRE REGISTRO</button>
 				</div>
 			</div>
 		)
