@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import OnLoading from "./pages/OnLoading";
 import Init from "./pages/init";
 import Register from './pages/Register';
@@ -56,23 +55,19 @@ class App extends React.Component {
 		.then(mainData => this.setState({mainData}));
 	}
 
+	// protecting routes if register is not configured yet
 	isProtected(route){
 		if(this.state.mainData){
 			switch(route){
 				case '/reg':
 					return this.state.mainData.data.length !==0 ? <Route path={route}><Register day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} /></Route> : <Redirect to='/init' />;
-					
 				case '/not':
 					return this.state.mainData.data.length !==0 ? <Route path={route}><Notification day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} /></Route> : <Redirect to='/init' />;
-					
 				case '/rep':
 					return this.state.mainData.data.length !==0 ? <Route path={route}><Report day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} /></Route> : <Redirect to='/init' />;
-					
 				default:
-					console.log('Route ' + route + ' not valid!')
+					console.log('Route ' + route + ' not valid!');
 			}
-		}else{
-			return '/jolly';
 		}
 	}
 
@@ -84,7 +79,7 @@ class App extends React.Component {
 					<Route exact path='/'>
 						<OnLoading mainData={this.state.mainData}/>
 					</Route>
-					<Route exact path='/init'>
+					<Route path='/init'>
 						<Init day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')}/>
 					</Route>
 					{this.isProtected('/reg')}
