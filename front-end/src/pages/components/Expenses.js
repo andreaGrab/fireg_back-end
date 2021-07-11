@@ -1,9 +1,10 @@
 import React from 'react';
+import Axios from 'axios';
 
 class Expenses extends React.Component{
 	constructor(props){
 		super(props);
-		this.state = {exps:[]};
+		this.state = {exps:[], onErr: 'none'};
 	}
 
 	componentDidMount(){
@@ -12,7 +13,21 @@ class Expenses extends React.Component{
 		.then(exps => this.setState({exps}));
 	}
 
+	deleteExpense(Id){
+		Axios.delete(`expenses/${Id}`)
+		.then(res=>console.log(res))
+		.catch(err=>this.setState({onErr:'inline'}));
+	}
+
 	render(){
+		const forbStyle = {
+			color: '#f00',
+			fontWeight: 'bolder',
+			fontSize: '12px',
+			marginLeft: '20px',
+			display: this.state.onErr
+		};
+
 		return(
 			<div className='regView__content__expenses'>
 				<table>
@@ -23,7 +38,9 @@ class Expenses extends React.Component{
 						</tr>
 						{this.state.exps.map(exp=>(							
 							<tr>
-								<td><strong>{exp.expenses}€</strong> {exp.name}</td>
+								<td><strong>{exp.expenses}€</strong> {exp.name} <button onClick={()=>this.deleteExpense(exp._id)}>Elimina</button>
+								<p style={forbStyle}>NON AUTORIZZATO</p>
+								</td>
 								{(()=>{
 									switch(exp.tag){
 										case "ordinaria": return <td className='tag tag--low'>{exp.tag}</td>;

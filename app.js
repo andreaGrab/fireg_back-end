@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+//const cookieParser = require('cookie-parser');
+
+//app.use(cookieParser());
 
 // routes
 const mainData = require('./api/routes/main-data');
@@ -30,7 +33,7 @@ mongoose.connect("mongodb+srv://Andrea:" +
 // prevent deprecating error of mongoose in console
 mongoose.Promise = global.Promise;
 
-// midleware
+// middleware
 app.use(morgan('dev'));// error handling
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());// parsing raw json body

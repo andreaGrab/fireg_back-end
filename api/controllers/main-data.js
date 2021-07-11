@@ -22,6 +22,7 @@ exports.get_all = (req, res, next)=>{
 	})
 	.catch(err=>{
 		res.status(500).send(err);
+		console.log(err);
 	});
 };
 
@@ -34,7 +35,8 @@ exports.add_data = (req, res, next)=>{
 
 	mainData.save()
 	.then(result=>{
-		res.status(201).send("Data registered!");
+		res.status(201).redirect('/reg');
+		console.log('Main data registered!');
 		Main_data();
 		const main_datFile = path.resolve('coding/capitale', '../../main_dat.js');
 		delete require.cache[main_datFile];
