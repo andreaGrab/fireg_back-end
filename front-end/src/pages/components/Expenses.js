@@ -10,7 +10,10 @@ class Expenses extends React.Component{
 	componentDidMount(){
 		fetch('/expenses/report')
 		.then(res => res.json())
-		.then(exps => this.setState({exps}));
+		.then((exps) => {
+			exps.reverse();
+			this.setState({exps})
+		});
 	}
 
 	deleteExpense(Id){
@@ -36,8 +39,9 @@ class Expenses extends React.Component{
 							<th>Uscite giustificate</th>
 							<th>Tipo/tag</th>
 						</tr>
-						{this.state.exps.map(exp=>(							
-							<tr>
+						{
+							this.state.exps.map(exp=>(							
+							<tr key={exp._id}>
 								<td><strong>{exp.expenses}€</strong> {exp.name} <button onClick={()=>this.deleteExpense(exp._id)}>Elimina</button>
 								<p style={forbStyle}>NON AUTORIZZATO</p>
 								</td>

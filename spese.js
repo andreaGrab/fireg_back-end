@@ -1,1 +1,1 @@
-let spese = []; module.exports = spese;
+let spese = [{"_id":"60ecadf8250fe084db0c94ec","name":"admin","expenses":10,"tag":"ordinaria","exp":"spesa"},{"_id":"60ecae6c250fe084db0c94ed","name":"admin","expenses":10,"tag":"ordinaria","exp":"spesa"},{"_id":"60ecae81250fe084db0c94ee","name":"admin","expenses":5,"tag":"ordinaria","exp":"spesa"}]; module.exports = spese;

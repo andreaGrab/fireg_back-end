@@ -70,6 +70,9 @@ class Report extends React.Component {
 						<div className='reportView__content__data__box'>
 							<p>Riserva in</p><br /><p>{this.state.reportData.riserva}</p>
 						</div>
+						<div className='reportView__content__data__box'>
+							<p>Scontrino medio</p><br /><p>{this.state.reportData.media}</p>
+						</div>
 					</div>
 					<div className='reportView__content__expenses'>
 						<table>
@@ -78,7 +81,7 @@ class Report extends React.Component {
 									<th>Uscite giustificate</th>
 									<th>Tipo/tag</th>
 								</tr>
-								{this.state.exps.map(exp=>(							
+								{this.state.exps.reverse().map(exp=>(							
 									<tr>
 										<td><strong>{exp.expenses}€</strong> {exp.name}</td>
 										{(()=>{

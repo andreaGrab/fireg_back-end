@@ -51,8 +51,8 @@ class Sidebar extends React.Component{
 					<h1>Capitale corrente<br />{
 						this.state.dat.corrente
 					}€</h1>
-					<Link className='btn-default btn-sidebar' to='/not'>NOTIFICA SPESA</Link>
-					<button className='btn-default btn-sidebar'><Link to='/rep'>RESOCONTO VELOCE</Link></button>
+					<Link to='/not'><button className='btn-default btn-sidebar'>NOTIFICA SPESA</button></Link><br/>
+					<Link to='/rep'><button className='btn-default btn-sidebar'>RESOCONTO VELOCE</button></Link>
 					<form style={{marginTop: '20px', textAlign: 'left'}} action='/login' method='post'>
 						<h3 style={{textAlign: 'center'}}>Autorizzazione admin</h3>
 						<label>

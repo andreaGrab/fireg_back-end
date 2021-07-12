@@ -3,9 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-//const cookieParser = require('cookie-parser');
-
-//app.use(cookieParser());
 
 // routes
 const mainData = require('./api/routes/main-data');
