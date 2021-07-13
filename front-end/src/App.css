@@ -163,9 +163,10 @@ input[type='text'] {
 
 .regView__content {
   padding: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 4fr;
+      grid-template-columns: 1fr 4fr;
 }
 
 .regView__content__sidebar {
@@ -173,24 +174,13 @@ input[type='text'] {
       -ms-flex: 1;
           flex: 1;
   text-align: center;
-  position: relative;
   border-right: 2px solid #3f6fbb;
-}
-
-.regView__content__sidebar__wrapper {
-  position: fixed;
-  height: 80%;
+  height: 100%;
 }
 
 .regView__content__sidebar__wrapper .btn-sidebar {
   margin-top: 40px;
-  width: 50%;
   font-size: 0.9375rem;
-}
-
-.regView__content__sidebar__wrapper .btn-sidebar:nth-child(2) {
-  background-color: #ffb400;
-  color: black;
 }
 
 .regView__content__sidebar__wrapper .btn-sidebar:hover {

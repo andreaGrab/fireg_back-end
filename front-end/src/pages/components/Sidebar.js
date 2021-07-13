@@ -5,8 +5,9 @@ import Axios from 'axios';
 class Sidebar extends React.Component{
 	constructor(props){
 		super(props);
-		this.state = {dat:[], onErr: "none"};
+		this.state = {dat:[], onErr: "none", isOpen: true};
 		this.abortAction = this.abortAction.bind(this);
+		this.popUpHandler = this.popUpHandler.bind(this);
 	}
 
 	componentDidMount(){
@@ -27,23 +28,19 @@ class Sidebar extends React.Component{
 		});
 	}
 
-	render(){
-		const formStyle = {
-			width: '345px',
-			height: '55px',
-			fontSize: '2rem',
-			border: '3px solid lightgrey',
-			borderRadius: '3px',
-			backgroundColor: '#29374f',
-			color: 'white',
-			boxShadow: '1px 3px 5px 1px rgba(0,0,0, .5)'
-		}
+	popUpHandler(){
+		this.props.isOpen(this.state.isOpen);
+	}
 
+	render(){
 		const forbStyle = {
 			color: '#f00',
 			fontWeight: 'bolder',
 			fontSize: '1.5rem',
-			display: this.state.onErr
+			display: this.state.onErr,
+			position: 'absolute',
+			bottom: '10rem',
+			left:0
 		};
 		return(
 			<div className="regView__content__sidebar">
@@ -52,19 +49,8 @@ class Sidebar extends React.Component{
 						this.state.dat.corrente
 					}€</h1>
 					<Link to='/not'><button className='btn-default btn-sidebar'>NOTIFICA SPESA</button></Link><br/>
-					<Link to='/rep'><button className='btn-default btn-sidebar'>RESOCONTO VELOCE</button></Link>
-					<form style={{marginTop: '20px', textAlign: 'left'}} action='/login' method='post'>
-						<h3 style={{textAlign: 'center'}}>Autorizzazione admin</h3>
-						<label>
-							<p>Name</p>
-							<input type='text' name='name' />
-						</label>
-						<label>
-							<p>Password</p>
-							<input style={formStyle} type='password' name='password' />
-						</label><br />
-						<input type='submit' />
-					</form>
+					<Link to='/rep'><button className='btn-default btn-sidebar'>RESOCONTO VELOCE</button></Link><br/>
+					<button className='btn-default btn-sidebar' onClick={this.popUpHandler}>AUTORIZZAZIONE ADMIN</button><br/>
 					<p style={forbStyle}>ABORT <br/>NON AUTORIZZATO!</p>
 					<button className='btn-default btn-default--abort' onClick={this.abortAction}>ABORTIRE REGISTRO</button>
 				</div>

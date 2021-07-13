@@ -18,7 +18,10 @@ class Expenses extends React.Component{
 
 	deleteExpense(Id){
 		Axios.delete(`expenses/${Id}`)
-		.then(res=>console.log(res))
+		.then((res)=>{
+			console.log(res);
+			window.location.reload();
+		})
 		.catch(err=>this.setState({onErr:'inline'}));
 	}
 
@@ -42,7 +45,7 @@ class Expenses extends React.Component{
 						{
 							this.state.exps.map(exp=>(							
 							<tr key={exp._id}>
-								<td><strong>{exp.expenses}€</strong> {exp.name} <button onClick={()=>this.deleteExpense(exp._id)}>Elimina</button>
+								<td><strong>{exp.expenses}€</strong> {exp.name} <button className='btn-default' style={{fontSize: '1rem', padding: '.2rem', backgroundColor:'#ff2121', borderColor: '#c10e6a', fontWeight: 'bold'}} onClick={()=>this.deleteExpense(exp._id)}>Elimina</button>
 								<p style={forbStyle}>NON AUTORIZZATO</p>
 								</td>
 								{(()=>{

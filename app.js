@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const router = express.Router();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
@@ -55,6 +56,7 @@ app.use((req, res, next)=>{
 /////////////////////////////////////////
 
 // routes handling
+app.use('/', router.get('/', (req, res)=>{res.send('FIN_AG API V1 - Author: Andrea Grabovac')}));
 app.use('/main-data', mainData);
 app.use('/expenses', expenses);
 app.use('/report', report);

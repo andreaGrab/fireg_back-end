@@ -4,6 +4,7 @@ import Init from "./pages/init";
 import Register from './pages/Register';
 import Notification from './pages/Notification';
 import Report from './pages/Report';
+import Popup from './pages/components/PopUp.js';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -15,8 +16,10 @@ class App extends React.Component {
 	constructor(props){
 		super(props);
 		this.getTheDate = this.getTheDate.bind(this);
+		this.openPopup = this.openPopup.bind(this);
 		this.state = {
-			mainData:null
+			mainData:null,
+			showPopup: false
 		};
 	}
 
@@ -55,12 +58,23 @@ class App extends React.Component {
 		.then(mainData => this.setState({mainData}));
 	}
 
+	togglePopup(){
+		this.setState({
+			showPopup: !this.state.showPopup
+		});
+	}
+
+	openPopup(value){
+		this.setState({
+			showPopup: value
+		});
+	}
 	// protecting routes if register is not configured yet
 	isProtected(route){
 		if(this.state.mainData){
 			switch(route){
 				case '/reg':
-					return this.state.mainData.data.length !==0 ? <Route path={route}><Register day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} /></Route> : <Redirect to='/init' />;
+					return this.state.mainData.data.length !==0 ? <Route path={route}><Register day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} isOpen={this.openPopup}/></Route> : <Redirect to='/init' />;
 				case '/not':
 					return this.state.mainData.data.length !==0 ? <Route path={route}><Notification day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} /></Route> : <Redirect to='/init' />;
 				case '/rep':
@@ -86,6 +100,7 @@ class App extends React.Component {
 					{this.isProtected('/not')}
 					{this.isProtected('/rep')}
 				</Switch>
+				{this.state.showPopup ? <Popup closePopup={this.togglePopup.bind(this)}/> : null}
 			    </div>
 		    </Router>
 		);
