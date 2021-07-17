@@ -12,11 +12,11 @@ class Report extends React.Component {
 	}
 
 	componentDidMount(){
-		fetch('/expenses/report')
+		fetch('/api/expenses/report')
 		.then(res => res.json())
 		.then(exps => this.setState({exps}));
 
-		fetch('/report')
+		fetch('/api/report')
 		.then(res => res.json())
 		.then(reportData => this.setState({reportData}));
 	}

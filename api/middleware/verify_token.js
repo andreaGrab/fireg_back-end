@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken');
-
 module.exports = (req, res, next)=>{
 		let headerOuth = req.headers.authorization;
 		let cookieVal = req.headers.cookie.split("=");

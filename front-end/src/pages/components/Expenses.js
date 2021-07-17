@@ -8,7 +8,7 @@ class Expenses extends React.Component{
 	}
 
 	componentDidMount(){
-		fetch('/expenses/report')
+		fetch('/api/expenses/report')
 		.then(res => res.json())
 		.then((exps) => {
 			exps.reverse();
@@ -17,7 +17,7 @@ class Expenses extends React.Component{
 	}
 
 	deleteExpense(Id){
-		Axios.delete(`expenses/${Id}`)
+		Axios.delete(`/api/expenses/${Id}`)
 		.then((res)=>{
 			console.log(res);
 			window.location.reload();
@@ -45,7 +45,7 @@ class Expenses extends React.Component{
 						{
 							this.state.exps.map(exp=>(							
 							<tr key={exp._id}>
-								<td><strong>{exp.expenses}€</strong> {exp.name} <button className='btn-default' style={{fontSize: '1rem', padding: '.2rem', backgroundColor:'#ff2121', borderColor: '#c10e6a', fontWeight: 'bold'}} onClick={()=>this.deleteExpense(exp._id)}>Elimina</button>
+								<td style={{display:'flex', alignItems:'center'}}><strong style={{marginRight:'10px'}}>{exp.expenses}€</strong> {exp.name} <button style={{background:'none', border: 'none', cursor:'pointer'}} onClick={()=>this.deleteExpense(exp._id)}><svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="24" height="24" fill='#ff2121' preserveAspectRatio="xMinYMin" className="icon__icon"><path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0 2C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10z"></path><path d="M11.414 10l2.829 2.828a1 1 0 0 1-1.415 1.415L10 11.414l-2.828 2.829a1 1 0 1 1-1.415-1.415L8.586 10 5.757 7.172a1 1 0 0 1 1.415-1.415L10 8.586l2.828-2.829a1 1 0 0 1 1.415 1.415L11.414 10z"></path></svg></button>
 								<p style={forbStyle}>NON AUTORIZZATO</p>
 								</td>
 								{(()=>{

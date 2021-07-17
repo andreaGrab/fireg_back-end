@@ -1,7 +1,7 @@
 import React from 'react';
+//import Axios from 'axios';
 
 class Popup extends React.Component {
-
     render() {
         const popUpStyle = {
             position: 'fixed',

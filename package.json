@@ -20,6 +20,8 @@
     "nodemon": "^1.19.2"
   },
   "dependencies": {
-    "cookie-parser": "^1.4.5"
+    "cookie-parser": "^1.4.5",
+    "node-sessionstorage": "^1.0.0",
+    "sessionstorage": "^0.1.0"
   }
 }

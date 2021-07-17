@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
 const MainData = require('../models/mainData');
 const Main_data = require('../../scripts/main_dat');
 const path = require('path');
+const sessionStorage = require('sessionstorage');
 
 // get all
 exports.get_all = (req, res, next)=>{
@@ -43,6 +43,7 @@ exports.add_data = (req, res, next)=>{
 	})
 	.catch(err=>{
 		console.log(err);
-		res.status(500).send(err);
+		sessionStorage.setItem('badReq', err.message);
+		res.status(400).redirect('/badreq');
 	});
 };

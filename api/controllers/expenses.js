@@ -4,6 +4,7 @@ const Spese = require('../../scripts/spese');
 const path = require('path');
 const speseFile = path.resolve('coding/capitale', '../../spese.js');
 const jwt= require('jsonwebtoken');
+const sessionStorage = require('sessionstorage');
 
 // get all
 exports.get_all = (req, res, next)=>{
@@ -64,16 +65,25 @@ exports.add_new = (req, res, next)=>{
 	});
 
 	expenses.save()
-		.then(result=>{
-			console.log(result);
-			res.status(201).redirect('/reg');
-			Spese();
-			delete require.cache[speseFile];
-		})
-		.catch(err=>{
+	.then(result=>{
+		console.log(result);
+		res.status(201).redirect('/reg');
+		Spese();
+		delete require.cache[speseFile];
+	})
+	.catch((err)=>{
+		if(req.body.name == null || typeof(req.body.name) != String){
+			sessionStorage.setItem('badReq', err.message);
+			res.status(400).redirect('/badreq');
+		}else if(req.body.expenses == null || typeof(req.body.name) != Number){
+			sessionStorage.setItem('badReq', err.message);
+			res.status(400).redirect('/badreq');
+		}else{
 			console.log(err);
-			res.status(500).send(err);
-		});
+			sessionStorage.setItem('badReq', err.message);
+			res.status(400).redirect('/badreq');
+		}
+	});
 };
 
 // delete by id
@@ -85,12 +95,12 @@ exports.delete = (req, res, next)=>{
 		}else{
 			Expenses.deleteOne({_id:req.params.expId})
 			.exec()
-			.then(result=>{
+			.then((result)=>{
 				res.status(200).send('Expenses deleted!');
 				Spese();
 				delete require.cache[speseFile];
 			})
-			.catch(err=>{
+			.catch((err)=>{
 				res.status(500).send(err);
 				console.log(err);
 			});

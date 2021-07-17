@@ -11,15 +11,16 @@ class Sidebar extends React.Component{
 	}
 
 	componentDidMount(){
-		fetch('/report')
+		fetch('/api/report')
 		.then(res => res.json())
 		.then(dat => {
 			this.setState({dat})
-		});
+		})
+		.catch(err=>console.log(err));
 	}
 
 	abortAction(){
-		Axios.delete('/abort')
+		Axios.delete('/api/abort')
 		.then(res => res)
 		.then(obj => console.log(obj.data))
 		.then(()=>window.location.reload())
@@ -40,7 +41,7 @@ class Sidebar extends React.Component{
 			display: this.state.onErr,
 			position: 'absolute',
 			bottom: '10rem',
-			left:0
+			left:'80px'
 		};
 		return(
 			<div className="regView__content__sidebar">

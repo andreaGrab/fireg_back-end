@@ -5,11 +5,13 @@ import Register from './pages/Register';
 import Notification from './pages/Notification';
 import Report from './pages/Report';
 import Popup from './pages/components/PopUp.js';
+import ErrCredentials from './pages/ErrCredentials';
+import BadRequest from './pages/BadRequest';
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Redirect
+	Redirect,
 } from 'react-router-dom';
 
 class App extends React.Component {
@@ -53,7 +55,7 @@ class App extends React.Component {
 	}
 
 	componentDidMount(){
-		fetch('/main-data')
+		fetch('/api/main-data')
 		.then(res => res.json())
 		.then(mainData => this.setState({mainData}));
 	}
@@ -99,6 +101,12 @@ class App extends React.Component {
 					{this.isProtected('/reg')}
 					{this.isProtected('/not')}
 					{this.isProtected('/rep')}
+					<Route path='/ercred'>
+						<ErrCredentials/>
+					</Route>
+					<Route path='/badreq'>
+						<BadRequest/>
+					</Route>
 				</Switch>
 				{this.state.showPopup ? <Popup closePopup={this.togglePopup.bind(this)}/> : null}
 			    </div>

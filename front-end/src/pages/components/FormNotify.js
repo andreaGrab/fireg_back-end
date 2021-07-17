@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class FromNotify extends React.Component {
 	render(){
 		return(
-			<form action='/expenses' method='post'>
+			<form action='/api/expenses' method='post'>
 				<label>
 					<p>SOMMA EUR</p>
 					<input type="text" name="expenses" />

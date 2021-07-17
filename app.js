@@ -34,7 +34,7 @@ mongoose.Promise = global.Promise;
 // middleware
 app.use(morgan('dev'));// error handling
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());// parsing raw json body
+app.use(bodyParser.json({extended:true}));// parsing raw json body
 
 
 // CORS errors prevention///////////////
@@ -56,12 +56,12 @@ app.use((req, res, next)=>{
 /////////////////////////////////////////
 
 // routes handling
-app.use('/', router.get('/', (req, res)=>{res.send('FIN_AG API V1 - Author: Andrea Grabovac')}));
-app.use('/main-data', mainData);
-app.use('/expenses', expenses);
-app.use('/report', report);
-app.use('/abort', abort);
-app.use('/signup', signUp);
+app.use('/api', router.get('/', (req, res)=>{res.send('FIN_AG API V1 - Author: Andrea Grabovac')}));
+app.use('/api/main-data', mainData);
+app.use('/api/expenses', expenses);
+app.use('/api/report', report);
+app.use('/api/abort', abort);
+app.use('/api/signup', signUp);
 app.use('/login', logIn);
 
 ////////////////////////////////////////

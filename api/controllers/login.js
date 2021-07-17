@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const sessionStorage = require('node-sessionstorage');
 
 exports.login = function(req, res, next){
 	const uName = req.body.name;
@@ -15,13 +16,12 @@ exports.login = function(req, res, next){
 					res.status(200).redirect('/reg');
 				});
 			}else{
-				// to make redirect page 400
-				res.status(400).send('Credentials incorrect!');
+				res.status(400).redirect('/ercred');
 			}
 		});
 	})
 	.catch(err=>{
-		res.status(400).send(err);
-		console.log(err);
+		sessionStorage.setItem('badReq', 'bar');
+		res.status(400).redirect('/badreq');
 	});
 };
