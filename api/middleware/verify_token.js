@@ -1,6 +1,6 @@
 module.exports = (req, res, next)=>{
 		let headerOuth = req.headers.authorization;
-		let cookieVal = req.headers.cookie.split("=");
+		let cookieVal = req.headers.cookie.split("token=");
 		headerOuth="Bearer " + cookieVal[1];
 		if(headerOuth != null){
 			// take from header authorization the token, splitting space between bearer & the token

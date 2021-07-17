@@ -43,7 +43,7 @@ class BadRequest extends React.Component {
               <h1>Errore: 400 (Bad Request)</h1>
               <h3 style={{marginBottom: '5rem'}}>Contattare il servizio tecnico o il fornitore del software.</h3>
               <Link to='/' style={btnErrStyle}>ESCI</Link>
-              <pre style={errorLogStyle}><p>Error Log: {console.log(window.sessionStorage)}</p></pre>
+              <pre style={errorLogStyle}><p>Error Log: {decodeURIComponent(document.cookie.split('badReq='))}</p></pre>
           </div>
       );
     }

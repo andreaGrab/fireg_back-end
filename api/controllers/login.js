@@ -21,7 +21,7 @@ exports.login = function(req, res, next){
 		});
 	})
 	.catch(err=>{
-		sessionStorage.setItem('badReq', 'bar');
+		res.cookie('badReq', err.message);
 		res.status(400).redirect('/badreq');
 	});
 };

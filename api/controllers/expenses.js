@@ -72,17 +72,9 @@ exports.add_new = (req, res, next)=>{
 		delete require.cache[speseFile];
 	})
 	.catch((err)=>{
-		if(req.body.name == null || typeof(req.body.name) != String){
-			sessionStorage.setItem('badReq', err.message);
-			res.status(400).redirect('/badreq');
-		}else if(req.body.expenses == null || typeof(req.body.name) != Number){
-			sessionStorage.setItem('badReq', err.message);
-			res.status(400).redirect('/badreq');
-		}else{
-			console.log(err);
-			sessionStorage.setItem('badReq', err.message);
-			res.status(400).redirect('/badreq');
-		}
+		console.log(err);
+		res.cookie('badReq', err.message);
+		res.status(400).redirect('/badreq');
 	});
 };
 
