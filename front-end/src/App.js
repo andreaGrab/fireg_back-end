@@ -7,6 +7,7 @@ import Report from './pages/Report';
 import Popup from './pages/components/PopUp.js';
 import ErrCredentials from './pages/ErrCredentials';
 import BadRequest from './pages/BadRequest';
+import NotAuth from './pages/NotAuth';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -95,18 +96,21 @@ class App extends React.Component {
 					<Route exact path='/'>
 						<OnLoading mainData={this.state.mainData}/>
 					</Route>
-					<Route path='/init'>
-						<Init day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')}/>
-					</Route>
-					{this.isProtected('/reg')}
-					{this.isProtected('/not')}
-					{this.isProtected('/rep')}
 					<Route path='/ercred'>
 						<ErrCredentials/>
 					</Route>
 					<Route path='/badreq'>
 						<BadRequest/>
 					</Route>
+					<Route path='/notauth'>
+						<NotAuth/>
+					</Route>
+					<Route path='/init'>
+						<Init day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')}/>
+					</Route>
+					{this.isProtected('/reg')}
+					{this.isProtected('/not')}
+					{this.isProtected('/rep')}
 				</Switch>
 				{this.state.showPopup ? <Popup closePopup={this.togglePopup.bind(this)}/> : null}
 			    </div>

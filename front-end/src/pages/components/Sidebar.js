@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import Axios from 'axios';
 
 class Sidebar extends React.Component{
@@ -25,7 +25,8 @@ class Sidebar extends React.Component{
 		.then(obj => console.log(obj.data))
 		.then(()=>window.location.reload())
 		.catch(err=>{
-			this.setState({onErr: 'inline'});
+			window.location.href = '/notauth';
+			console.log(err);
 		});
 	}
 
@@ -34,15 +35,6 @@ class Sidebar extends React.Component{
 	}
 
 	render(){
-		const forbStyle = {
-			color: '#f00',
-			fontWeight: 'bolder',
-			fontSize: '1.5rem',
-			display: this.state.onErr,
-			position: 'absolute',
-			bottom: '10rem',
-			left:'80px'
-		};
 		return(
 			<div className="regView__content__sidebar">
 				<div className='regView__content__sidebar__wrapper'>
@@ -52,7 +44,6 @@ class Sidebar extends React.Component{
 					<Link to='/not'><button className='btn-default btn-sidebar'>NOTIFICA SPESA</button></Link><br/>
 					<Link to='/rep'><button className='btn-default btn-sidebar'>RESOCONTO VELOCE</button></Link><br/>
 					<button className='btn-default btn-sidebar' onClick={this.popUpHandler}>AUTORIZZAZIONE ADMIN</button><br/>
-					<p style={forbStyle}>ABORT <br/>NON AUTORIZZATO!</p>
 					<button className='btn-default btn-default--abort' onClick={this.abortAction}>ABORTIRE REGISTRO</button>
 				</div>
 			</div>

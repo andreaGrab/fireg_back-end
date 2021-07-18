@@ -9,7 +9,7 @@ class Init extends React.Component {
 				<h1><span>DATA CORRENTE</span><br />{this.props.day} {this.props.month} {this.props.year}</h1>
 			</div>
 
-			<form className='setUpReg__form' action='/main-data' method='post'>
+			<form className='setUpReg__form' action='/api/main-data' method='post'>
 				<label>
 					<p>INSERIRE IL CAPITALE</p><br />
 					<input type="text" name="capital" />

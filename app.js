@@ -62,7 +62,7 @@ app.use('/api/expenses', expenses);
 app.use('/api/report', report);
 app.use('/api/abort', abort);
 app.use('/api/signup', signUp);
-app.use('/login', logIn);
+app.use('/api/login', logIn);
 
 ////////////////////////////////////////
 //- error 404 handling

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class ErrCredentials extends React.Component {
+class NotAuth extends React.Component {
 
     render() {
         let errorStyle = {
@@ -24,12 +24,12 @@ class ErrCredentials extends React.Component {
         }
       return (
           <div style={errorStyle}>
-              <h1>Errore: 400 (Bad Request) - credenziali errate!</h1>
-              <h3 style={{marginBottom: '5rem'}}>Nome utente o password sono errati</h3>
+              <h1>Errore: 401 (Not Authorized) - Non Autorizzato!</h1>
+              <h3 style={{marginBottom: '5rem'}}>Azione protetta. Effettuare richiesta di autorizzazione nell'area "Autorizzazione Admin"</h3>
               <Link to='/reg' style={btnErrStyle}>TORNA AL REGISTRO</Link>
           </div>
       );
     }
   }
 
-  export default ErrCredentials;
+  export default NotAuth;
