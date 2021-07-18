@@ -6,7 +6,7 @@ import html2canvas from 'html2canvas';
 class Report extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = {exps:[], reportData:[]};
+		this.state = {exps:[], mData:[], reportData:[] };
 		this.printPage = this.printPage.bind(this);
 		this.pdfPage = this.pdfPage.bind(this);
 	}
@@ -16,9 +16,34 @@ class Report extends React.Component {
 		.then(res => res.json())
 		.then(exps => this.setState({exps}));
 
-		fetch('/api/report')
+		fetch('/api/main-data')
 		.then(res => res.json())
-		.then(reportData => this.setState({reportData}));
+		.then(mData => {
+			this.setState({mData});
+			let speseCifre = [];
+			if(this.state.exps){
+				this.state.exps.forEach((spesa)=>{
+					speseCifre.push(spesa.expenses);
+				});
+			}else{
+				speseCifre=0;
+			}
+
+			const bilancio = speseCifre.length ? Math.round((speseCifre.reduce((a,c)=>a+c))*100)/100 : 0;
+			const cCorrente = Math.round((mData['data'][0].capital - bilancio)*100)/100;
+			const cRiserva = Math.round((cCorrente - mData['data'][0].reserve)*100)/100;
+			const media = speseCifre.length ? Math.round(bilancio / speseCifre.length * 100)/100 : 0;
+
+			const resoconto = [];
+			resoconto["resoconto"] = {
+					capitale: mData['data'][0].capital,
+					corrente: cCorrente,
+					bilancio: bilancio,
+					riserva: cRiserva,
+					media: media	
+				};
+			this.setState({reportData:resoconto['resoconto']});
+		});
 	}
 
  	printPage(){

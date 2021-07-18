@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 // routes
 const mainData = require('./api/routes/main-data');
 const expenses = require('./api/routes/expenses');
-const report = require('./api/routes/report');
 const abort = require('./api/routes/abort');
 const signUp = require('./api/routes/signup');
 const logIn = require('./api/routes/login');
@@ -59,7 +58,6 @@ app.use((req, res, next)=>{
 app.use('/api', router.get('/', (req, res)=>{res.send('FIN_AG API V1 - Author: Andrea Grabovac')}));
 app.use('/api/main-data', mainData);
 app.use('/api/expenses', expenses);
-app.use('/api/report', report);
 app.use('/api/abort', abort);
 app.use('/api/signup', signUp);
 app.use('/api/login', logIn);

@@ -31,7 +31,6 @@ exports.add_data = (req, res, next)=>{
 		capital: req.body.capital,
 		reserve: req.body.reserve
 	});
-
 	mainData.save()
 	.then(result=>{
 		res.status(201).redirect('/reg');

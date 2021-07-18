@@ -4,7 +4,6 @@ const Spese = require('../../scripts/spese');
 const path = require('path');
 const speseFile = path.resolve('coding/capitale', '../../spese.js');
 const jwt= require('jsonwebtoken');
-const sessionStorage = require('sessionstorage');
 
 // get all
 exports.get_all = (req, res, next)=>{
