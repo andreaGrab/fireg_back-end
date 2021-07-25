@@ -76,21 +76,22 @@ class App extends React.Component {
 			}else{
 				speseCifre=0;
 			}
+			if(this.state.mainData.data.length){
+				const bilancio = speseCifre.length ? Math.round((speseCifre.reduce((a,c)=>a+c))*100)/100 : 0;
+				const cCorrente = Math.round((mData['data'][0].capital - bilancio)*100)/100;
+				const cRiserva = Math.round((cCorrente - mData['data'][0].reserve)*100)/100;
+				const media = speseCifre.length ? Math.round(bilancio / speseCifre.length * 100)/100 : 0;
 
-			const bilancio = speseCifre.length ? Math.round((speseCifre.reduce((a,c)=>a+c))*100)/100 : 0;
-			const cCorrente = Math.round((mData['data'][0].capital - bilancio)*100)/100;
-			const cRiserva = Math.round((cCorrente - mData['data'][0].reserve)*100)/100;
-			const media = speseCifre.length ? Math.round(bilancio / speseCifre.length * 100)/100 : 0;
-
-			const resoconto = [];
-			resoconto["resoconto"] = {
-					capitale: mData['data'][0].capital,
-					corrente: cCorrente,
-					bilancio: bilancio,
-					riserva: cRiserva,
-					media: media	
-				};
-			this.setState({reportData:resoconto['resoconto']});
+				const resoconto = [];
+				resoconto["resoconto"] = {
+						capitale: mData['data'][0].capital,
+						corrente: cCorrente,
+						bilancio: bilancio,
+						riserva: cRiserva,
+						media: media	
+					};
+				this.setState({reportData:resoconto['resoconto']});
+			}
 		});
 	}
 

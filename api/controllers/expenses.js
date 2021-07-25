@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 const Expenses = require('../models/expenses');
-const Spese = require('../../scripts/spese');
-const path = require('path');
-const speseFile = path.resolve('coding/capitale', '../../spese.js');
 const jwt= require('jsonwebtoken');
 
 // get all
@@ -68,8 +65,6 @@ exports.add_new = (req, res, next)=>{
 	.then(result=>{
 		console.log(result);
 		res.status(201).redirect('/reg');
-		Spese();
-		delete require.cache[speseFile];
 	})
 	.catch((err)=>{
 		console.log(err);
@@ -87,10 +82,8 @@ exports.delete = (req, res, next)=>{
 		}else{
 			Expenses.deleteOne({_id:req.params.expId})
 			.exec()
-			.then((result)=>{
+			.then(()=>{
 				res.status(200).send('Expenses deleted!');
-				Spese();
-				delete require.cache[speseFile];
 			})
 			.catch((err)=>{
 				res.status(500).send(err);

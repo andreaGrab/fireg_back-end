@@ -12,12 +12,6 @@ const abort = require('./api/routes/abort');
 const signUp = require('./api/routes/signup');
 const logIn = require('./api/routes/login');
 
-// save/update local files from db (spese & main_dat)
-const Spese = require('./scripts/spese');
-Spese();
-const Main_data = require('./scripts/main_dat');
-Main_data();
-
 // db connection
 mongoose.connect("mongodb+srv://Andrea:" + 
 	process.env.MONGO_PSWD +

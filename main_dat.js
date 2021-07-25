@@ -1,1 +1,0 @@
-let main_dat = {"data":[{"capital":1000,"reserve":200,"mData":"main-data"}]}; module.exports = main_dat;

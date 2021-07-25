@@ -1,6 +1,4 @@
 const MainData = require('../models/mainData');
-const Main_data = require('../../scripts/main_dat');
-const path = require('path');
 
 // get all
 exports.get_all = (req, res, next)=>{
@@ -35,9 +33,6 @@ exports.add_data = (req, res, next)=>{
 	.then(result=>{
 		res.status(201).redirect('/reg');
 		console.log('Main data registered!');
-		Main_data();
-		const main_datFile = path.resolve('coding/capitale', '../../main_dat.js');
-		delete require.cache[main_datFile];
 	})
 	.catch(err=>{
 		res.cookie('badReq', err.message);

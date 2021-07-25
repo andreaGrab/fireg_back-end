@@ -1,8 +1,5 @@
 const Expenses = require('../models/expenses');
 const MainData = require('../models/mainData');
-const path = require('path');
-const Spese = require('../../scripts/spese');
-const speseFile = path.resolve('coding/capitale', '../../spese.js');
 const jwt = require('jsonwebtoken');
 
 exports.abort = (req, res, next)=>{
@@ -17,8 +14,6 @@ exports.abort = (req, res, next)=>{
 					console.log(err);
 				}
 				console.log('expenses deleted');
-				Spese();
-				delete require.cache[speseFile];
 			});
 			MainData.deleteMany({mData: "main-data"}, err=>{
 				if(err){
