@@ -6,44 +6,9 @@ import html2canvas from 'html2canvas';
 class Report extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = {exps:[], mData:[], reportData:[] };
+		this.state = {exps:[], mData:[]};
 		this.printPage = this.printPage.bind(this);
 		this.pdfPage = this.pdfPage.bind(this);
-	}
-
-	componentDidMount(){
-		fetch('/api/expenses/report')
-		.then(res => res.json())
-		.then(exps => this.setState({exps}));
-
-		fetch('/api/main-data')
-		.then(res => res.json())
-		.then(mData => {
-			this.setState({mData});
-			let speseCifre = [];
-			if(this.state.exps){
-				this.state.exps.forEach((spesa)=>{
-					speseCifre.push(spesa.expenses);
-				});
-			}else{
-				speseCifre=0;
-			}
-
-			const bilancio = speseCifre.length ? Math.round((speseCifre.reduce((a,c)=>a+c))*100)/100 : 0;
-			const cCorrente = Math.round((mData['data'][0].capital - bilancio)*100)/100;
-			const cRiserva = Math.round((cCorrente - mData['data'][0].reserve)*100)/100;
-			const media = speseCifre.length ? Math.round(bilancio / speseCifre.length * 100)/100 : 0;
-
-			const resoconto = [];
-			resoconto["resoconto"] = {
-					capitale: mData['data'][0].capital,
-					corrente: cCorrente,
-					bilancio: bilancio,
-					riserva: cRiserva,
-					media: media	
-				};
-			this.setState({reportData:resoconto['resoconto']});
-		});
 	}
 
  	printPage(){
@@ -84,19 +49,19 @@ class Report extends React.Component {
 				<div className='reportView__content'>
 					<div className='reportView__content__data'>
 						<div className='reportView__content__data__box'>
-							<p>Capitale iniziale</p><br /><p>{this.state.reportData.capitale} EUR</p>
+							<p>Capitale iniziale</p><br /><p>{!this.props.reportData ? 'loading...' : this.props.reportData.capitale} EUR</p>
 						</div>
 						<div className='reportView__content__data__box'>
-							<p>Capitale corrente</p><br /><p>{this.state.reportData.corrente} EUR</p>
+							<p>Capitale corrente</p><br /><p>{!this.props.reportData ? 'loading...' : this.props.reportData.corrente} EUR</p>
 						</div>
 						<div className='reportView__content__data__box'>
-							<p>Bilancio spesa</p><br /><p>{this.state.reportData.bilancio} EUR</p>
+							<p>Bilancio spesa</p><br /><p>{!this.props.reportData ? 'loading...' : this.props.reportData.bilancio} EUR</p>
 						</div>
 						<div className='reportView__content__data__box'>
-							<p>Riserva in</p><br /><p>{this.state.reportData.riserva}</p>
+							<p>Riserva in</p><br /><p>{!this.props.reportData ? 'loading...' : this.props.reportData.riserva}</p>
 						</div>
 						<div className='reportView__content__data__box'>
-							<p>Scontrino medio</p><br /><p>{this.state.reportData.media}</p>
+							<p>Scontrino medio</p><br /><p>{!this.props.reportData ? 'loading...' : this.props.reportData.media}</p>
 						</div>
 					</div>
 					<div className='reportView__content__expenses'>
@@ -106,7 +71,7 @@ class Report extends React.Component {
 									<th>Uscite giustificate</th>
 									<th>Tipo/tag</th>
 								</tr>
-								{this.state.exps.reverse().map(exp=>(							
+								{this.props.exps.map(exp=>(							
 									<tr>
 										<td><strong>{exp.expenses}€</strong> {exp.name}</td>
 										{(()=>{

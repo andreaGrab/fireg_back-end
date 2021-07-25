@@ -50,6 +50,7 @@ exports.get_all_report = (req, res, next)=>{
 	})
 	.catch(err=>{
 		res.status(500).send(err);
+		console.log(err);
 	});
 };
 

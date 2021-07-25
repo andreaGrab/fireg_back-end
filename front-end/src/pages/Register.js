@@ -20,8 +20,8 @@ class Register extends React.Component {
 				</div>
 			</div>
 			<div className='regView__content'>
-				<Sidebar  isOpen={this.props.isOpen}/>
-				<Expenses />
+				<Sidebar reportData={this.props.reportData} isOpen={this.props.isOpen}/>
+				<Expenses exps={this.props.exps} />
 			</div>
 		</div>
 		);

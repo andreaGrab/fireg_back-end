@@ -10,15 +10,6 @@ class Sidebar extends React.Component{
 		this.popUpHandler = this.popUpHandler.bind(this);
 	}
 
-	componentDidMount(){
-		fetch('/api/report')
-		.then(res => res.json())
-		.then(dat => {
-			this.setState({dat})
-		})
-		.catch(err=>console.log(err));
-	}
-
 	abortAction(){
 		Axios.delete('/api/abort')
 		.then(res => res)
@@ -39,7 +30,7 @@ class Sidebar extends React.Component{
 			<div className="regView__content__sidebar">
 				<div className='regView__content__sidebar__wrapper'>
 					<h1>Capitale corrente<br />{
-						this.state.dat.corrente
+						!this.props.reportData ? 'loading' : this.props.reportData.corrente
 					}€</h1>
 					<Link to='/not'><button className='btn-default btn-sidebar'>NOTIFICA SPESA</button></Link><br/>
 					<Link to='/rep'><button className='btn-default btn-sidebar'>RESOCONTO VELOCE</button></Link><br/>

@@ -21,8 +21,10 @@ class App extends React.Component {
 		this.getTheDate = this.getTheDate.bind(this);
 		this.openPopup = this.openPopup.bind(this);
 		this.state = {
+			exps:[],
 			mainData:null,
-			showPopup: false
+			showPopup: false,
+			reportData: null
 		};
 	}
 
@@ -56,9 +58,40 @@ class App extends React.Component {
 	}
 
 	componentDidMount(){
+		// get all expenses
+		fetch('/api/expenses/report')
+		.then(res => res.json())
+		.then(exps => {exps.reverse(); this.setState({exps})});
+
+		// calculate report
 		fetch('/api/main-data')
 		.then(res => res.json())
-		.then(mainData => this.setState({mainData}));
+		.then(mData => {
+			this.setState({mainData: mData});
+			let speseCifre = [];
+			if(this.state.exps){
+				this.state.exps.forEach((spesa)=>{
+					speseCifre.push(spesa.expenses);
+				});
+			}else{
+				speseCifre=0;
+			}
+
+			const bilancio = speseCifre.length ? Math.round((speseCifre.reduce((a,c)=>a+c))*100)/100 : 0;
+			const cCorrente = Math.round((mData['data'][0].capital - bilancio)*100)/100;
+			const cRiserva = Math.round((cCorrente - mData['data'][0].reserve)*100)/100;
+			const media = speseCifre.length ? Math.round(bilancio / speseCifre.length * 100)/100 : 0;
+
+			const resoconto = [];
+			resoconto["resoconto"] = {
+					capitale: mData['data'][0].capital,
+					corrente: cCorrente,
+					bilancio: bilancio,
+					riserva: cRiserva,
+					media: media	
+				};
+			this.setState({reportData:resoconto['resoconto']});
+		});
 	}
 
 	togglePopup(){
@@ -77,11 +110,11 @@ class App extends React.Component {
 		if(this.state.mainData){
 			switch(route){
 				case '/reg':
-					return this.state.mainData.data.length !==0 ? <Route path={route}><Register day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} isOpen={this.openPopup}/></Route> : <Redirect to='/init' />;
+					return this.state.mainData.data.length !==0 ? <Route path={route}><Register reportData={this.state.reportData} exps={this.state.exps} day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} isOpen={this.openPopup}/></Route> : <Redirect to='/init' />;
 				case '/not':
 					return this.state.mainData.data.length !==0 ? <Route path={route}><Notification day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} /></Route> : <Redirect to='/init' />;
 				case '/rep':
-					return this.state.mainData.data.length !==0 ? <Route path={route}><Report day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} /></Route> : <Redirect to='/init' />;
+					return this.state.mainData.data.length !==0 ? <Route path={route}><Report reportData={this.state.reportData} exps={this.state.exps} day={this.getTheDate('d')} month={this.getTheDate('m')} year={this.getTheDate('y')} /></Route> : <Redirect to='/init' />;
 				default:
 					console.log('Route ' + route + ' not valid!');
 			}
