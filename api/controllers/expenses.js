@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Expenses = require('../models/expenses');
 const jwt= require('jsonwebtoken');
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') })
 
 // get all
 exports.get_all = (req, res, next)=>{

@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "env": "0.0.2",
     "node-sessionstorage": "^1.0.0",
     "sessionstorage": "^0.1.0"
   }

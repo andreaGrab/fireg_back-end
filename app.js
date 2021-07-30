@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, './.env') })
 // routes
 const mainData = require('./api/routes/main-data');
 const expenses = require('./api/routes/expenses');
@@ -14,8 +16,7 @@ const logIn = require('./api/routes/login');
 
 // db connection
 mongoose.connect("mongodb+srv://Andrea:" + 
-	process.env.MONGO_PSWD +
-	"@tutorial-9hkwc.mongodb.net/fin_ag?retryWrites=true&w=majority",
+	process.env.MONGO_PSWD + process.env.CONNECTION_URL,
 	{
 		useNewUrlParser: true
 	}
