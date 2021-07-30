@@ -26,5 +26,8 @@
     "env": "0.0.2",
     "node-sessionstorage": "^1.0.0",
     "sessionstorage": "^0.1.0"
+  },
+  "engines": {
+    "node": "10.15.2"
   }
 }
