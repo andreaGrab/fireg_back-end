@@ -18,7 +18,8 @@ const logIn = require('./api/routes/login');
 mongoose.connect("mongodb+srv://Andrea:" + 
 	process.env.MONGO_PSWD + process.env.CONNECTION_URL,
 	{
-		useNewUrlParser: true
+		useNewUrlParser: true,
+		useUnifiedTopology: true
 	}
 );
 
