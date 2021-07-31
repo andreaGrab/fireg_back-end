@@ -49,12 +49,9 @@ app.use((req, res, next)=>{
 });
 /////////////////////////////////////////
 
-// backend welcome route
-app.use('/', (req, res)=>{
-	res.send('FIN_AG API V1 - Author: Andrea Grabovac');
-});
 
 // routes handling
+app.use('/', router.get('/', (req, res)=>{res.send('FIN_AG API V1 - Author: Andrea Grabovac')}));
 app.use('/api/main-data', mainData);
 app.use('/api/expenses', expenses);
 app.use('/api/abort', abort);
