@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') })
+require('dotenv').config({path: path.resolve(__dirname, '../../.env')})
 
 exports.login = function(req, res, next){
 	const uName = req.body.name;

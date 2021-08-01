@@ -1,10 +1,11 @@
 module.exports = (req, res, next)=>{
-		let headerOuth = req.headers.authorization;
+		let headerAuth = req.headers.authorization;
 		let cookieVal = req.headers.cookie.split("token=");
-		headerOuth="Bearer " + cookieVal[1];
-		if(headerOuth != null){
+		console.log(cookieVal);
+		headerAuth="Bearer " + cookieVal[1];
+		if(headerAuth != null){
 			// take from header authorization the token, splitting space between bearer & the token
-			const token = headerOuth.split(" ")[1];
+			const token = headerAuth.split(" ")[1];
 			console.log(token);
 			// set a token property of req obj to the token it self
 			req.token = token;
