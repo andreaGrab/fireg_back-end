@@ -1,11 +1,11 @@
 module.exports = (req, res, next)=>{
-		if(typeof req.headers.authorization !== 'string'){
+		let headerAuth = req.headers.authorization;
+		if(typeof headerAuth !== 'string'){
 			res.status(400);
-			console.log(req.headers.authorization);
+			console.log(headerAuth + "from authorization header");
 		}else{
-			let headerAuth = req.headers.authorization;
 			let cookieVal = req.headers.cookie.split("token=");
-			console.log(cookieVal);
+			console.log(cookieVal + "from cookie header");
 			headerAuth="Bearer " + cookieVal[1];
 		}
 		if(headerAuth != null){
