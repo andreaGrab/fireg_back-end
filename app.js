@@ -4,9 +4,12 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
+// connecting to .env file
 const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, './.env') })
+require('dotenv').config({ path: path.resolve(__dirname, './.env') });
+
 // routes
 const mainData = require('./api/routes/main-data');
 const expenses = require('./api/routes/expenses');
@@ -15,7 +18,7 @@ const signUp = require('./api/routes/signup');
 const logIn = require('./api/routes/login');
 
 // db connection
-mongoose.connect("mongodb+srv://Andrea:" + 
+mongoose.connect(process.env.MONGODB_USER + 
 	process.env.MONGO_PSWD + process.env.CONNECTION_URL,
 	{
 		useNewUrlParser: true,
@@ -33,22 +36,11 @@ app.use(bodyParser.json({extended:true}));// parsing raw json body
 
 
 // CORS errors prevention///////////////
-app.use((req, res, next)=>{
-	// Allowing access origin to all domains
-	res.header('Access-Control-Allow-Origin', '*');
-	// Types of header allowed
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-	);
-	// if request method is options allow all http methods
-	if(req.method === 'OPTIONS'){
-		res.header('Access-Constrol-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-		return res.status(200).json({});
-	}
-	next();// go to next middleware
-});
-/////////////////////////////////////////
+app.use(cors({
+	origin: true,
+	methods: ['GET', 'POST', 'DELETE'],
+	allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+}));
 
 
 // routes handling
