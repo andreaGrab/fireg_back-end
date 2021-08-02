@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 // connecting to .env file
 const path = require('path')
@@ -30,6 +31,7 @@ mongoose.connect(process.env.MONGODB_USER +
 mongoose.Promise = global.Promise;
 
 // middleware
+app.use(cookieParser());
 app.use(morgan('dev'));// error handling
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json({extended:true}));// parsing raw json body
