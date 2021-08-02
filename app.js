@@ -39,9 +39,10 @@ app.use(bodyParser.json({extended:true}));// parsing raw json body
 
 // CORS errors prevention///////////////
 app.use(cors({
+	credentials: true,
 	origin: 'https://localhost:3000',
-	methods: ['GET', 'POST', 'DELETE']
-	//allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+	methods: ['GET', 'POST', 'DELETE'],
+	allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
 }));
 
 
