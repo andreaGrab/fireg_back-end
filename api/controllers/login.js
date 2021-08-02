@@ -13,7 +13,7 @@ exports.login = function(req, res, next){
 			if(response){
 				jwt.sign({name:userDb[0].name},process.env.JWT_SECRET, {expiresIn: 30},(err, token)=>{
 					// setting cookies
-					res.cookie('token', token, {maxAge: 24 * 60 * 60 * 1000, httpOnly: false});
+					res.cookie('token', token, {maxAge: 24 * 60 * 60 * 1000, httpOnly: false, sameSite: "None"});
 					res.redirect('http://localhost:3000/reg');
 				});
 			}else{
