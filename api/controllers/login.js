@@ -12,8 +12,7 @@ exports.login = function(req, res, next){
 		bcrypt.compare(uPass, userDb[0].password, function(err, response){
 			if(response){
 				jwt.sign({name:userDb[0].name},process.env.JWT_SECRET, {expiresIn: 30},(err, token)=>{
-					// setting cookies
-					/*res.cookie('token', token, {maxAge: 24 * 60 * 60 * 1000, httpOnly: false, sameSite: "None", secure: true});*/
+					// sending jwt
 					res.json({token: token});
 				});
 			}else{

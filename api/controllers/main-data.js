@@ -31,11 +31,10 @@ exports.add_data = (req, res, next)=>{
 	});
 	mainData.save()
 	.then(result=>{
-		res.status(201).redirect('/reg');
+		res.status(201).send(result);
 		console.log('Main data registered!');
 	})
 	.catch(err=>{
-		res.cookie('badReq', err.message);
-		res.status(400).redirect('/badreq');
+		res.status(400).send(err);
 	});
 };

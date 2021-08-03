@@ -66,12 +66,11 @@ exports.add_new = (req, res, next)=>{
 	expenses.save()
 	.then(result=>{
 		console.log(result);
-		res.status(201).redirect('/reg');
+		res.status(201).send(result);
 	})
 	.catch((err)=>{
 		console.log(err);
-		res.cookie('badReq', err.message);
-		res.status(400).redirect('/badreq');
+		res.status(400).send(err);
 	});
 };
 
