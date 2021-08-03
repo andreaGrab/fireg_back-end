@@ -13,8 +13,8 @@ exports.login = function(req, res, next){
 			if(response){
 				jwt.sign({name:userDb[0].name},process.env.JWT_SECRET, {expiresIn: 30},(err, token)=>{
 					// setting cookies
-					res.cookie('token', token, {maxAge: 24 * 60 * 60 * 1000, httpOnly: false, sameSite: "None", secure: true});
-					res.redirect('https://localhost:3000/reg');
+					/*res.cookie('token', token, {maxAge: 24 * 60 * 60 * 1000, httpOnly: false, sameSite: "None", secure: true});*/
+					res.send(token);
 				});
 			}else{
 				res.status(400).redirect('/ercred');
